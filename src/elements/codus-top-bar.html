@@ -1,0 +1,38 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="codus-top-bar">
+    <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        background: purple;
+        padding: 10px;
+        width:100%;
+      }
+    </style>
+    <div>
+      <h1>Top Bar</h1>
+    </div>
+  </template>
+
+    <script>
+        class CodusTopBar extends Polymer.Element {
+            static get is() {
+                return 'codus-top-bar';
+            }
+        }
+
+        window.customElements.define(CodusTopBar.is, CodusTopBar);
+    </script>
+</dom-module>
