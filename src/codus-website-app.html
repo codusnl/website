@@ -36,38 +36,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
 
-      app-drawer-layout:not([narrow]) [drawer-toggle] {
-        display: none;
-      }
-
-      app-header {
-        color: #fff;
-        background-color: var(--app-primary-color);
-      }
-
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }
-
-      .drawer-list {
-        margin: 0 20px;
-      }
-
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        text-decoration: none;
-        color: var(--app-secondary-color);
-        line-height: 40px;
-      }
-
-      .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
-      }
-
-<<<<<<< HEAD
-=======
     /* ----------------------- Parallax styles ---------------------- */
     
     parallax-element {
@@ -136,26 +104,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       background-position: 50% 55% !important;
       background-color: #4CAF50;
     }
->>>>>>> 6272c2e694c9fc7c4e055b19178034960f40388b
     </style>
 
   <codus-top-bar>
   </codus-top-bar>
-  <codus-container>
-    <marked-element>
-      <div class="markdown-html"></div>
-      <script type="text/markdown" src="../content/README.md"></script>
-    </marked-element>
-  </codus-container>
 
-  <parallax-element style="border: 1px solid red">
+  <parallax-element>
 
     <parallax-layers id="imgHeader" style="z-index: -1;">
       <iron-image depth="-0.6" sizing="cover" preload fade src="/images/res/meneham.jpg" class="background fullbleed"></iron-image>
       <div depth="-0.4" class="titleContainer fullbleed">
         <a href="https://en.wikipedia.org/wiki/Brittany" title="Breizh Bretagne Britanny" class="title">Breizh / Bretagne / Britanny</a>
       </div>
-      <p>Meneham</p>
+        <codus-container>
+    <marked-element>
+      <div class="markdown-html"></div>
+      <script type="text/markdown" src="../content/README.md"></script>
+    </marked-element>
+  </codus-container>
     </parallax-layers>
     
     <div class="baseGroup">
