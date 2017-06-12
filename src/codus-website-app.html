@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="elements/codus-container.html">
 
 <link rel="import" href="elements/codus-icons.html">
-
+<link rel="import" href="../bower_components/marked-element/marked-element.html">
 
 <dom-module id="codus-website-app">
     <template>
@@ -59,10 +59,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: black;
         font-weight: bold;
       }
+
     </style>
 
-  <codus-top-bar></codus-top-bar>
-  <codus-container></codus-container>
+  <codus-top-bar>
+  </codus-top-bar>
+  <codus-container>
+    <marked-element>
+      <div class="markdown-html"></div>
+      <script type="text/markdown" src="../content/README.md"></script>
+    </marked-element>
+  </codus-container>
 
   </template>
 

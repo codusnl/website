@@ -9,21 +9,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
 <link rel="import" href="../shared-styles.html">
+<link rel="import" href="codus-icons.html">
 
 <dom-module id="codus-top-bar">
     <template>
     <style include="shared-styles">
+
       :host {
         display: block;
-        background: purple;
+        background: #000000;
         padding: 10px;
         width:100%;
       }
+      div {
+        font-family: "font132904";
+        color:#ffffff;
+      }
+      iron-icon {
+        --iron-icon-height: 40px;
+        --iron-icon-width: 40px;
+        --iron-icon-fill-color:#00A7D2;
+      }
+
+  .flex-horizontal {
+    @apply(--layout-horizontal);
+  }
+  .flexchild {
+    @apply(--layout-flex);
+  }
     </style>
-    <div>
-      <h1>Top Bar</h1>
+ <div class="container flex-horizontal">
+   <div class="flexchild">
+       <iron-icon icon="codus:logo"></iron-icon>
+      <div>Codus</div>
     </div>
+    <div>
+      Some copy
+      </div>
+</div>
   </template>
 
     <script>
