@@ -12,6 +12,7 @@
         "iron-iconset-svg": "^2.0.0",
         "iron-media-query": "^2.0.0",
         "iron-pages": "^2.0.0",
+        "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#^1.0.0",
         "iron-selector": "^2.0.0",
         "paper-button": "^2.0.0",
         "paper-icon-button": "^2.0.0",
@@ -25,7 +26,6 @@
         "neon-animation": "^2.0.0",
         "paper-listbox": "^2.0.0",
         "marked-element": "^2.1.1",
-        "parallax-element": "^1.1.1",
         "iron-image": "^2.1.1"
     },
     "resolutions": {
