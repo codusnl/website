@@ -21,13 +21,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       :host {
         display: block;
-        background: #000000;
         padding: 10px;
         width:100%;
       }
+
       div {
         font-family: "font132904";
-        color:#ffffff;
+
       }
       iron-icon {
         --iron-icon-height: 40px;
@@ -36,20 +36,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
   .flex-horizontal {
-    @apply(--layout-horizontal);
+      @apply --layout-horizontal;
+      @apply --layout-around-justified;
   }
   .flexchild {
-    @apply(--layout-flex);
+    @apply --layout-flex;
   }
+  nav {
+     @apply --layout-self-center;
+     padding-right:10vh;
+  }
+
     </style>
  <div class="container flex-horizontal">
    <div class="flexchild">
        <iron-icon icon="codus:logo"></iron-icon>
       <div>Codus</div>
     </div>
-    <div>
+    <nav>
       Some copy
-      </div>
+      </nav>
 </div>
   </template>
 

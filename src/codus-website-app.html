@@ -22,6 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="elements/codus-top-bar.html">
 <link rel="import" href="elements/codus-container.html">
+<link rel="import" href="elements/codus-scroll-top-bar.html">
 
 <link rel="import" href="elements/codus-icons.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
@@ -58,14 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       @apply --layout-flex;
     }
 
-    
-    app-box p {
-      position: absolute;
-      bottom: 0;
-      font-size: 1.5em;
-      color: white;
-      text-shadow: 2px -2px 11px rgba(0, 0, 0, 1);
-    }
+  
 
     app-box {
       height:100vh;
@@ -73,22 +67,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-position: 50% -50%;
       };
     }
+    app-box#navbar {
+      height:84px;
+    }
     app-box img {
       height: 140vh;
     }
+  
+    marked-element#intro {
+      @apply --layout-horizontal;
+      @apply --layout-center;
+      height: 100vh;
+    }
+    marked-element#intro {
+      color: #ffffff;
+      font-size: 3vh;
+      text-align: center;
+      width: 40vh;
+      margin: 0 auto;
+      font-family: "font132904";
+    }
+    codus-top-bar {
+      position:fixed; 
+        background-color: #000000;
+        color:#ffffff;
+        z-index:+1;
+        transition:  0.5s ease;
+      }
+      codus-top-bar.towhite {
+        background-color: #ffffff;
+        color:#000000;
+      }
 
     </style>
 
-  <codus-top-bar>
-  </codus-top-bar>
-
-
+<app-box id="navbar" effects="codus-change-top-bar" threshold="500" scroll-target="document">
+        <codus-top-bar>
+      </codus-top-bar>
+</app-box>
     <app-box effects="parallax-background">
-      <img slot="background" src="/images/res/yeun-elez.jpg">
+      <img slot="background" src="/images/res/ile-vierge.jpg">
         <codus-container>
-          <marked-element>
+          <marked-element id="intro">
             <div class="markdown-html"></div>
-            <script type="text/markdown" src="../content/README.md"></script>
+            <script type="text/markdown" src="../content/intro.md"></script>
           </marked-element>
         </codus-container>
       <p>Yeun Elez</p>
@@ -105,7 +127,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
     
     <app-box effects="parallax-background">
-      <img slot="background" src="/images/res/ile-vierge.jpg">
+      <img slot="background" src="/images/res/yeun-elez.jpg">
       <p>Crozon</p>
     </app-box>
     
