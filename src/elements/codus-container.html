@@ -16,12 +16,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       :host {
         display: block;
-
-        padding: 10px;
+        @apply --layout-container;
+      }
+      div {
+          padding: var(--container-padding, 10px);
       }
     </style>
-
-     <slot></slot>
+    <div>
+      <slot></slot>
+    </div>
   </template>
 
     <script>

@@ -15,14 +15,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 
 
 <link rel="import" href="elements/codus-top-bar.html">
 <link rel="import" href="elements/codus-container.html">
-<link rel="import" href="elements/codus-scroll-top-bar.html">
 
 <link rel="import" href="elements/codus-icons.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
@@ -33,7 +32,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         --app-primary-color: #4285f4;
         --app-secondary-color: black;
-
+        --layout-container: {
+          z-index: 1;
+          min-height: 100vh;
+        };
+        --container-padding: 5vw;
         display: block;
       }
 
@@ -58,9 +61,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       @apply --layout-around-justified;
       @apply --layout-flex;
     }
-
-  
-
     app-box {
       height:100vh;
       --app-header-background-front-layer: {
@@ -71,124 +71,141 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       height:84px;
     }
     app-box img {
-      height: 140vh;
+      min-width: 100vw;
+      min-height:140vh;
     }
   
+
     marked-element#intro {
       @apply --layout-horizontal;
       @apply --layout-center;
-      height: 100vh;
-    }
-    marked-element#intro {
       color: #ffffff;
       font-size: 3vh;
       text-align: center;
       width: 40vh;
+      height: 90vh;
       margin: 0 auto;
       font-family: "font132904";
     }
-    codus-top-bar {
+    #navbar codus-top-bar {
       position:fixed; 
         background-color: #000000;
         color:#ffffff;
         z-index:+1;
-        transition:  0.5s ease;
+        transition:  1s ease;
       }
-      codus-top-bar.towhite {
+      #navbar codus-top-bar a {
+        color:#ffffff;
+        text-decoration: none;
+      }
+      
+      #navbar[threshold-triggered] codus-top-bar{
         background-color: #ffffff;
-        color:#000000;
+      }
+      #navbar[threshold-triggered] codus-top-bar a {
+        color: #000000;
       }
 
     </style>
 
-<app-box id="navbar" effects="codus-change-top-bar" threshold="500" scroll-target="document">
+    <app-box id="navbar" threshold="500" scroll-target="document">
         <codus-top-bar>
-      </codus-top-bar>
-</app-box>
+          <template is="dom-repeat" items="[[containers]]">
+            <a href="[[_setId(item.id)]]" on-tap="doScrolling">[[item.title]]</a>
+          </template>
+    </codus-top-bar>
+    </app-box>
     <app-box effects="parallax-background">
-      <img slot="background" src="/images/res/ile-vierge.jpg">
-        <codus-container>
-          <marked-element id="intro">
-            <div class="markdown-html"></div>
-            <script type="text/markdown" src="../content/intro.md"></script>
-          </marked-element>
+        <img slot="background" src="/images/res/ile-vierge.jpg">
+        <codus-container id="home" title="Home">
+            <marked-element id="intro">
+                <div class="markdown-html"></div>
+                <script type="text/markdown" src="../content/intro.md"></script>
+            </marked-element>
         </codus-container>
-      <p>Yeun Elez</p>
     </app-box>
 
-    <div class="baseGroup">
+    <codus-container id="number2" title="Page 1">
+        <!-- demo content (wikipedia extract), do not worry about this -->
+        <p><a href="https://en.wikipedia.org/wiki/Brittany#Prehistoric_origins" title="Prehistoric origins" class="subtitle">Prehistoric origins</a></p>
+        <p>Brittany has been inhabited by humans since the <a href="https://en.wikipedia.org/wiki/Lower_Paleolithic" title="Lower Paleolithic">Lower Paleolithic</a>. The first settlers were <a href="https://en.wikipedia.org/wiki/Neanderthal" title="Neanderthal">Neanderthals</a>.
+            This population was scarce and very similar to the other Neanderthals found in the whole of Western Europe. Their only original feature was a distinct culture, called "Colombanian".<sup id="cite_ref-12" class="reference"><a href="#cite_note-12"><span>[</span>12<span>]</span></a></sup>            One of the oldest <a href="https://en.wikipedia.org/wiki/Hearth" title="Hearth">hearths</a> in the world has been found in <a href="https://en.wikipedia.org/wiki/Plouhinec,_Finist%C3%A8re" title="Plouhinec, Finistère">Plouhinec, Finistère</a>.
+            It is 450,000 years old.</p>
+        <p>Neolithic Brittany is characterised by an important <a href="https://en.wikipedia.org/wiki/Megalithic_architectural_elements" title="Megalithic architectural elements">megalithic production</a>, and it is sometimes designated as the "core area"
+            of megalithic culture.<sup id="cite_ref-13" class="reference"><a href="#cite_note-13"><span>[</span>13<span>]</span></a></sup> The oldest monuments, <a href="https://en.wikipedia.org/wiki/Cairn" title="Cairn">cairns</a>, were followed by princely
+            tombs and <a href="https://en.wikipedia.org/wiki/Stone_row" title="Stone row">stone rows</a>. The <a href="https://en.wikipedia.org/wiki/Morbihan" title="Morbihan">Morbihan</a> <i><a href="https://en.wikipedia.org/wiki/D%C3%A9partement" title="Département" class="mw-redirect">département</a></i>,
+            on the southern coast, comprises a large share of these structures, including the <a href="https://en.wikipedia.org/wiki/Carnac_stones" title="Carnac stones">Carnac stones</a> and the Broken Menhir of Er Grah in <a href="https://en.wikipedia.org/wiki/Locmariaquer_megaliths"
+                title="Locmariaquer megaliths">Locmariaquer</a>, the largest single stone erected by Neolithic man.</p>
+        <!-- end of content -->
+    </codus-container>
 
-      <!-- demo content (wikipedia extract), do not worry about this -->
-      <p><a href="https://en.wikipedia.org/wiki/Brittany#Prehistoric_origins" title="Prehistoric origins" class="subtitle">Prehistoric origins</a></p>
-      <p>Brittany has been inhabited by humans since the <a href="https://en.wikipedia.org/wiki/Lower_Paleolithic" title="Lower Paleolithic">Lower Paleolithic</a>. The first settlers were <a href="https://en.wikipedia.org/wiki/Neanderthal" title="Neanderthal">Neanderthals</a>. This population was scarce and very similar to the other Neanderthals found in the whole of Western Europe. Their only original feature was a distinct culture, called "Colombanian".<sup id="cite_ref-12" class="reference"><a href="#cite_note-12"><span>[</span>12<span>]</span></a></sup> One of the oldest <a href="https://en.wikipedia.org/wiki/Hearth" title="Hearth">hearths</a> in the world has been found in <a href="https://en.wikipedia.org/wiki/Plouhinec,_Finist%C3%A8re" title="Plouhinec, Finistère">Plouhinec, Finistère</a>. It is 450,000 years old.</p>
-      <p>Neolithic Brittany is characterised by an important <a href="https://en.wikipedia.org/wiki/Megalithic_architectural_elements" title="Megalithic architectural elements">megalithic production</a>, and it is sometimes designated as the "core area" of megalithic culture.<sup id="cite_ref-13" class="reference"><a href="#cite_note-13"><span>[</span>13<span>]</span></a></sup> The oldest monuments, <a href="https://en.wikipedia.org/wiki/Cairn" title="Cairn">cairns</a>, were followed by princely tombs and <a href="https://en.wikipedia.org/wiki/Stone_row" title="Stone row">stone rows</a>. The <a href="https://en.wikipedia.org/wiki/Morbihan" title="Morbihan">Morbihan</a> <i><a href="https://en.wikipedia.org/wiki/D%C3%A9partement" title="Département" class="mw-redirect">département</a></i>, on the southern coast, comprises a large share of these structures, including the <a href="https://en.wikipedia.org/wiki/Carnac_stones" title="Carnac stones">Carnac stones</a> and the Broken Menhir of Er Grah in <a href="https://en.wikipedia.org/wiki/Locmariaquer_megaliths" title="Locmariaquer megaliths">Locmariaquer</a>, the largest single stone erected by Neolithic man.</p>
-      <!-- end of content -->
-      
-    </div>
-    
     <app-box effects="parallax-background">
-      <img slot="background" src="/images/res/yeun-elez.jpg">
-      <p>Crozon</p>
+        <img slot="background" src="/images/res/yeun-elez.jpg">
+        <p>Crozon</p>
     </app-box>
-    
-    <div class="baseGroup">
-      <p><a href="https://en.wikipedia.org/wiki/Brittany#Middle_Ages" title="Middle Ages" class="subtitle">Middle Ages</a></p>
-      <p>At the beginning of the medieval era, Brittany was divided between three kingdoms, <a href="https://en.wikipedia.org/wiki/Domnon%C3%A9e" title="Domnonée">Domnonea</a>, <a href="https://en.wikipedia.org/wiki/Cornouaille" title="Cornouaille">Cornouaille</a> and <a href="https://en.wikipedia.org/wiki/Bro%C3%ABrec" title="Broërec" class="mw-redirect">Broërec</a>. These realms eventually merged into a single state during the 9th century.<sup id="cite_ref-23" class="reference"><a href="#cite_note-23"><span>[</span>20<span>]</span></a></sup><sup id="cite_ref-autogenerated1_24-0" class="reference"><a href="#cite_note-autogenerated1-24"><span>[</span>21<span>]</span></a></sup> The unification of Brittany was carried out by <a href="https://en.wikipedia.org/wiki/Nominoe" title="Nominoe">Nominoe</a>, king between 845 and 851 and considered as the Breton <i><a href="https://en.wikipedia.org/wiki/Pater_Patriae" title="Pater Patriae">pater patriae</a></i>. His son <a href="https://en.wikipedia.org/wiki/Erispoe" title="Erispoe">Erispoe</a> secured the independence of the new kingdom of Brittany and won the <a href="https://en.wikipedia.org/wiki/Battle_of_Jengland" title="Battle of Jengland">Battle of Jengland</a> against <a href="https://en.wikipedia.org/wiki/Charles_the_Bald" title="Charles the Bald">Charles the Bald</a>. The Bretons won another war in 867, and the kingdom reached then its maximum extent: it received parts of <a href="https://en.wikipedia.org/wiki/Normandy" title="Normandy">Normandy</a>, <a href="https://en.wikipedia.org/wiki/Maine_(province_of_France)" title="Maine (province of France)" class="mw-redirect">Maine</a> and <a href="https://en.wikipedia.org/wiki/Anjou" title="Anjou">Anjou</a> and the <a href="https://en.wikipedia.org/wiki/Channel_Islands" title="Channel Islands">Channel Islands</a>.</p>
-      <!-- end of content -->
-      
-    </div>
-    
-    <app-box effects="parallax-background">
-      <img slot="background" src="/images/res/saint-michel.jpg">
-      <p>Menez Sant-Mikael</p>
-    </app-box>
-    
-    <div class="baseGroup">
 
-      <!-- demo content (wikipedia extract), do not worry about this -->
-      <p><a href="https://en.wikipedia.org/wiki/Brittany#Geography_and_natural_history" title="Geography and natural history" class="subtitle">Geography and natural history</a></p>
-      <p>Brittany is the largest French <a href="https://en.wikipedia.org/wiki/Peninsula" title="Peninsula">peninsula</a>. It is around 34,030&nbsp;km<sup>2</sup> (13,140&nbsp;sq&nbsp;mi) and stretches towards the northwest and the Atlantic Ocean. It is bordered to the north by the <a href="https://en.wikipedia.org/wiki/English_Channel" title="English Channel">English Channel</a>, to the south by the <a href="https://en.wikipedia.org/wiki/Bay_of_Biscay" title="Bay of Biscay">Bay of Biscay</a> and the waters located between the western coast and <a href="https://en.wikipedia.org/wiki/Ushant" title="Ushant">Ushant island</a> form the <a href="https://en.wikipedia.org/wiki/Iroise_Sea" title="Iroise Sea">Iroise Sea</a>.</p>
-      <p>The Breton coast is very indented, with many cliffs, <a href="https://en.wikipedia.org/wiki/Ria" title="Ria">rias</a> and <a href="https://en.wikipedia.org/wiki/Cape_(geography)" title="Cape (geography)">capes</a>. The <a href="https://en.wikipedia.org/wiki/Gulf_of_Morbihan" title="Gulf of Morbihan">Gulf of Morbihan</a> is a vast <a href="https://en.wikipedia.org/wiki/Natural_harbour" title="Natural harbour" class="mw-redirect">natural harbour</a> with some forty islands that is almost a closed sea. In total, around 800 islands lie off the mainland; the largest being <a href="https://en.wikipedia.org/wiki/Belle_%C3%8Ele" title="Belle Île">Belle Île</a>, in the south. Brittany has over 2,860&nbsp;km (1,780&nbsp;mi) of coastline; it represents a third of the total French coastline.</p>
-      <!-- end of content -->
-      
-    </div>
-    
-    <app-box effects="parallax-background">
-      <img slot="background" src="/images/res/ploumanach.jpg">
-      <p>Ploumanac'h</p>
-    </app-box>
-    
-    <div class="baseGroup">
+    <codus-container id="num2" title="About us">
+        <p><a href="https://en.wikipedia.org/wiki/Brittany#Middle_Ages" title="Middle Ages" class="subtitle">Middle Ages</a></p>
+        <p>At the beginning of the medieval era, Brittany was divided between three kingdoms, <a href="https://en.wikipedia.org/wiki/Domnon%C3%A9e" title="Domnonée">Domnonea</a>, <a href="https://en.wikipedia.org/wiki/Cornouaille" title="Cornouaille">Cornouaille</a>            and <a href="https://en.wikipedia.org/wiki/Bro%C3%ABrec" title="Broërec" class="mw-redirect">Broërec</a>. These realms eventually merged into a single state during the 9th century.<sup id="cite_ref-23" class="reference"><a href="#cite_note-23"><span>[</span>20<span>]</span></a></sup>
+            <sup id="cite_ref-autogenerated1_24-0" class="reference"><a href="#cite_note-autogenerated1-24"><span>[</span>21<span>]</span></a></sup> The unification of Brittany was carried out by <a href="https://en.wikipedia.org/wiki/Nominoe" title="Nominoe">Nominoe</a>,
+            king between 845 and 851 and considered as the Breton <i><a href="https://en.wikipedia.org/wiki/Pater_Patriae" title="Pater Patriae">pater patriae</a></i>. His son <a href="https://en.wikipedia.org/wiki/Erispoe" title="Erispoe">Erispoe</a>            secured the independence of the new kingdom of Brittany and won the <a href="https://en.wikipedia.org/wiki/Battle_of_Jengland" title="Battle of Jengland">Battle of Jengland</a> against <a href="https://en.wikipedia.org/wiki/Charles_the_Bald"
+                title="Charles the Bald">Charles the Bald</a>. The Bretons won another war in 867, and the kingdom reached then its maximum extent: it received parts of <a href="https://en.wikipedia.org/wiki/Normandy" title="Normandy">Normandy</a>, <a href="https://en.wikipedia.org/wiki/Maine_(province_of_France)"
+                title="Maine (province of France)" class="mw-redirect">Maine</a> and <a href="https://en.wikipedia.org/wiki/Anjou" title="Anjou">Anjou</a> and the <a href="https://en.wikipedia.org/wiki/Channel_Islands" title="Channel Islands">Channel Islands</a>.</p>
+        <!-- end of content -->
 
-      <!-- demo content (wikipedia extract), do not worry about this -->
-      <p><a href="https://en.wikipedia.org/wiki/Brittany#Regional_identity" title="Regional identity" class="subtitle">Regional identity</a></p>
-      <p>Breton political parties do not have a wide support and their electoral success is small. However, Bretons have a strong cultural identity. According to a poll made in 2008, 50% of the inhabitants of the <a href="https://en.wikipedia.org/wiki/Brittany_(administrative_region)" title="Brittany (administrative region)">Region Brittany</a> consider themselves as much Breton as French, 22.5% feel more Breton than French, and 15.4% more French than Breton. A minority, 1.5%, considers itself Breton but not French, while 9.3% do not consider themselves to be Breton at all.</p>
-      <p>Breton is a <a href="https://en.wikipedia.org/wiki/Celtic_language" title="Celtic language" class="mw-redirect">Celtic language</a> derived from the historical <a href="https://en.wikipedia.org/wiki/Common_Brittonic" title="Common Brittonic">Common Brittonic</a> language, and is most closely related to <a href="https://en.wikipedia.org/wiki/Cornish_language" title="Cornish language">Cornish</a> and <a href="https://en.wikipedia.org/wiki/Welsh_language" title="Welsh language">Welsh</a>. It was imported in Western <a href="https://en.wikipedia.org/wiki/Armorica" title="Armorica">Armorica</a> during the 5th century by Britons fleeing the <a href="https://en.wikipedia.org/wiki/Anglo-Saxon_invasion_of_Britain" title="Anglo-Saxon invasion of Britain" class="mw-redirect">Anglo-Saxon invasion of Britain</a>. Since the 13th century, long before the <a href="https://en.wikipedia.org/wiki/Union_of_Brittany_and_France" title="Union of Brittany and France">union of Brittany and France</a>, the main administrative language of the Duchy of Brittany had been French, which had replaced Latin.</p>
-      <!-- end of content -->
+    </codus-container>
 
-    </div>
-    
     <app-box effects="parallax-background">
-      <img slot="background" src="/images/res/huelgoat.jpg">
-      <p>Huelgoat</p>
+        <img slot="background" src="/images/res/saint-michel.jpg">
+        <p>Menez Sant-Mikael</p>
     </app-box>
-    
-    <div class="baseGroup footer">
-      <p>Text extracts : <a href="http://www.wikipedia.com"><img src="/images/res/wikipedia.png" style="height: 1.4em;" alt="wikipedia"></a></p>
-      <p>Photos : <a href="https://www.github.com/vguillou" class="subtitle">Vincent&nbsp;Guillou</a></p>
-    </div>
-  
-  </template>
+
+    <codus-container id="yep" title="Blogs">
+
+        <!-- demo content (wikipedia extract), do not worry about this -->
+        <p><a href="https://en.wikipedia.org/wiki/Brittany#Geography_and_natural_history" title="Geography and natural history" class="subtitle">Geography and natural history</a></p>
+        <p>Brittany is the largest French <a href="https://en.wikipedia.org/wiki/Peninsula" title="Peninsula">peninsula</a>. It is around 34,030&nbsp;km<sup>2</sup> (13,140&nbsp;sq&nbsp;mi) and stretches towards the northwest and the Atlantic Ocean. It is
+            bordered to the north by the <a href="https://en.wikipedia.org/wiki/English_Channel" title="English Channel">English Channel</a>, to the south by the <a href="https://en.wikipedia.org/wiki/Bay_of_Biscay" title="Bay of Biscay">Bay of Biscay</a>            and the waters located between the western coast and <a href="https://en.wikipedia.org/wiki/Ushant" title="Ushant">Ushant island</a> form the <a href="https://en.wikipedia.org/wiki/Iroise_Sea" title="Iroise Sea">Iroise Sea</a>.</p>
+        <p>The Breton coast is very indented, with many cliffs, <a href="https://en.wikipedia.org/wiki/Ria" title="Ria">rias</a> and <a href="https://en.wikipedia.org/wiki/Cape_(geography)" title="Cape (geography)">capes</a>. The <a href="https://en.wikipedia.org/wiki/Gulf_of_Morbihan"
+                title="Gulf of Morbihan">Gulf of Morbihan</a> is a vast <a href="https://en.wikipedia.org/wiki/Natural_harbour" title="Natural harbour" class="mw-redirect">natural harbour</a> with some forty islands that is almost a closed sea. In total,
+            around 800 islands lie off the mainland; the largest being <a href="https://en.wikipedia.org/wiki/Belle_%C3%8Ele" title="Belle Île">Belle Île</a>, in the south. Brittany has over 2,860&nbsp;km (1,780&nbsp;mi) of coastline; it represents a
+            third of the total French coastline.</p>
+        <!-- end of content -->
+
+    </codus-container>
+
+    <app-box effects="parallax-background">
+        <img slot="background" src="/images/res/ploumanach.jpg">
+        <p>Ploumanac'h</p>
+    </app-box>
+
+    <codus-container class="footer">
+        <p>Text extracts :
+            <a href="http://www.wikipedia.com"><img src="/images/res/wikipedia.png" style="height: 1.4em;" alt="wikipedia"></a>
+        </p>
+        <p>Photos : <a href="https://www.github.com/vguillou" class="subtitle">Vincent&nbsp;Guillou</a></p>
+    </codus-container>
+
+    </template>
 
     <script>
-        class CodusWebsiteApp extends Polymer.Element {
+        class CodusWebsiteApp extends Polymer.GestureEventListeners(Polymer.Element) {
 
             static get is() {
                 return 'codus-website-app';
             }
 
             static get properties() {
-                return {};
+                return {
+                    duration: {
+                        type: Number,
+                        value: 500,
+                    },
+                    containers: {
+                        type: Array,
+                        observer: '_containersChanged',
+                    },
+                };
             }
 
             static get observers() {
@@ -198,9 +215,78 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             constructor() {
                 super();
             }
+            ready() {
+                super.ready();
+                let containers = this.shadowRoot.querySelectorAll('codus-container');
+                let nwcontainers = [];
+                containers.forEach((element) => {
+                    // Polymer.Gestures.addListener(element, 'tap', (e) => this.doScrolling(e));
+                    nwcontainers.push({
+                        'id': element.id,
+                        'title': element.title,
+                    });
+                });
+                this.containers = nwcontainers;
+            }
+            _containersChanged(c) {
+                console.log(c);
+            }
+            _setId(id) {
+                return '#' + id;
+            }
+            getElementY(query) {
+                return window.pageYOffset +
+                    this.shadowRoot.querySelector(query).getBoundingClientRect().top;
+            }
+
+            doScrolling(evt) {
+                let element = evt.path[0].getAttribute('href');
+                let duration = this.duration;
+                let startingY = window.pageYOffset;
+                let elementY = this.getElementY(element);
+                // If element is close to page's bottom then window will scroll only
+                // to some position above the element.
+                let targetY = document.body.scrollHeight - elementY < window.innerHeight ?
+                    document.body.scrollHeight - window.innerHeight : elementY;
+                let diff = targetY - startingY;
+                // Easing function: easeInOutCubic
+                // From: https://gist.github.com/gre/1650294
+                let easing = (t) => {
+                    return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+                };
+                let start;
+
+                if (!diff) return;
+
+                // Bootstrap our animation - it will get called right before
+                // next frame shall be rendered.
+                window.requestAnimationFrame(function step(timestamp) {
+                    if (!start) start = timestamp;
+                    // Elapsed miliseconds since start of scrolling.
+                    var time = timestamp - start;
+                    // Get percent of completion in range [0, 1].
+                    var percent = Math.min(time / duration, 1);
+                    // Apply the easing.
+                    // It can cause bad-looking slow frames in browser
+                    // performance tool, so be careful.
+                    percent = easing(percent);
+
+                    window.scrollTo(0, startingY + diff * percent);
+
+                    // Proceed with animation as long as we wanted it to.
+                    if (time < duration) {
+                        window.requestAnimationFrame(step);
+                    }
+                });
+            }
 
         }
 
         window.customElements.define(CodusWebsiteApp.is, CodusWebsiteApp);
+        // Apply event handlers. Example of firing the scrolling mechanism.
+        //  document.getElementById('scrollMid').addEventListener('click', doScrolling.bind(null, '#middle', 1000));
+
+        // Or simply:
+        // doScrolling('#mytarget', 1000)
     </script>
 </dom-module>
