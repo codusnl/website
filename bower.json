@@ -25,7 +25,7 @@
         "iron-form": "^1.1.5",
         "neon-animation": "^2.0.0",
         "paper-listbox": "^2.0.0",
-        "marked-element": "^2.1.1",
+        "marked-element": "^2.2.0",
         "iron-image": "^2.1.1"
     },
     "resolutions": {
