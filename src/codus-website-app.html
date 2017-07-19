@@ -231,8 +231,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.containers = nwcontainers;
             }
             getMarkdown(page) {
-                var url=`https://raw.githubusercontent.com/codusnl/website/parallax/content/${page}.md?b=`+(new Date).getTime();
-                // console.log(url)
+                var url=`https://raw.githubusercontent.com/codusnl/website/master/content/${page}.md?b=`+(new Date).getTime();
+                console.log(url)
                 return url;
             }
             _containersChanged(c) {
