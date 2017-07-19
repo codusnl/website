@@ -85,7 +85,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       width: 40vh;
       height: 90vh;
       margin: 0 auto;
-      font-family: "font132904";
+      /*font-family: "font132904";*/
+      font-family: "helvetica"
     }
     #navbar codus-top-bar {
       position:fixed; 
@@ -120,7 +121,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <codus-container id="home" title="Home">
             <marked-element id="intro">
                 <div class="markdown-html"></div>
-                <script type="text/markdown" src="../content/intro.md"></script>
+                <script type="text/markdown" src="[[getMarkdown('intro')]]"></script>
             </marked-element>
         </codus-container>
     </app-box>
@@ -227,6 +228,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     });
                 });
                 this.containers = nwcontainers;
+            }
+            getMarkdown(page) {
+                var url=`https://raw.githubusercontent.com/codusnl/website/parallax/content/${page}.md?b=`+(new Date).getTime();
+                // console.log(url)
+                return url;
             }
             _containersChanged(c) {
                 console.log(c);
