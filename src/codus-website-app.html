@@ -111,7 +111,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-box id="navbar" threshold="500" scroll-target="document">
         <codus-top-bar>
           <template is="dom-repeat" items="[[containers]]">
-            <a href="[[_setId(item.id)]]" on-tap="doScrolling">[[item.title]]</a>
+            <a href="#" on-tap="doScrolling">[[item.title]]</a>
           </template>
     </codus-top-bar>
     </app-box>
@@ -240,7 +240,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             doScrolling(evt) {
-                let element = evt.path[0].getAttribute('href');
+                let element = this._setId(evt.model.item.id);
                 let duration = this.duration;
                 let startingY = window.pageYOffset;
                 let elementY = this.getElementY(element);
