@@ -120,46 +120,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </codus-top-bar>
     </app-box>
     <app-box effects="parallax-background">
-        <img slot="background" src="/content/images/block1.jpg">
+        <img slot="background" src="[[getImageUrl('intro')]]">
         <codus-container id="home" title="Home">
             <marked-element id="intro">
                 <div slot="markdown-html"></div>
-                <script type="text/markdown" src="[[getMarkdown('intro')]]"></script>
+                <script type="text/markdown" src="[[getMarkdownUrl('intro')]]"></script>
             </marked-element>
         </codus-container>
     </app-box>
 
     <codus-container id="number2" title="Page 1">
-        <marked-element class="block" id="block1">
+        <marked-element id="block1">
             <div slot="markdown-html"></div>
-            <script type="text/markdown" src="[[getMarkdown('block1')]]"></script>
+            <script type="text/markdown" src="[[getMarkdownUrl('block1')]]"></script>
         </marked-element>
     </codus-container>
 
     <app-box effects="parallax-background">
-        <img slot="background" src="/content/images/block2.jpg">
+        <img slot="background" src="[[getImageUrl('block1')]]">
     </app-box>
 
     <codus-container id="num2" title="About us">
         <marked-element id="block2">
             <div slot="markdown-html"></div>
-            <script type="text/markdown" src="[[getMarkdown('block2')]]"></script>
+            <script type="text/markdown" src="[[getMarkdownUrl('block2')]]"></script>
         </marked-element>
     </codus-container>
 
     <app-box effects="parallax-background">
-        <img slot="background" src="/content/images/block3.jpg">
+        <img slot="background" src="[[getImageUrl('block2')]]">
     </app-box>
 
     <codus-container id="yep" title="Blogs">
         <marked-element id="block3">
             <div slot="markdown-html"></div>
-            <script type="text/markdown" src="[[getMarkdown('block3')]]"></script>
+            <script type="text/markdown" src="[[getMarkdownUrl('block3')]]"></script>
         </marked-element>
     </codus-container>
 
     <app-box effects="parallax-background">
-        <img slot="background" src="/content/images/block4.jpg">
+        <img slot="background" src="[[getImageUrl('block3')]]">
     </app-box>
 
     <codus-container class="footer">
@@ -210,9 +210,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 });
                 this.containers = nwcontainers;
             }
-            getMarkdown(page) {
+            getMarkdownUrl(page) {
                 var url=`https://raw.githubusercontent.com/codusnl/website/master/content/${page}.md?b=`+(new Date).getTime();
-                console.log(url)
+                // console.log(url)
+                return url;
+            }
+            getImageUrl(page) {
+                var url=`https://raw.githubusercontent.com/codusnl/website/master/content/images/${page}.jpg?b=`+(new Date).getTime();
+                // console.log(url)
                 return url;
             }
             _containersChanged(c) {
