@@ -5,7 +5,7 @@
   ],
   "license": "https://polymer.github.io/LICENSE.txt",
   "dependencies": {
-    "app-layout": "^2.0.0",
+    "app-layout": "PolymerElements/app-layout#^2.0.1",
     "app-route": "PolymerElements/app-route#2.0-preview",
     "iron-ajax": "^2.0.2",
     "iron-flex-layout": "^2.0.0",
@@ -36,7 +36,7 @@
     "iron-ajax": "^2.0.2"
   },
   "devDependencies": {
-    "web-component-tester": "^6.0.0"
+    "web-component-tester": "^6.1.5"
   },
   "private": true
 }
