@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @license
  * Copyright (c) 2016 The Polymer Project Authors. All rights reserved.

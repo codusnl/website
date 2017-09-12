@@ -113,13 +113,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       #navbar[threshold-triggered] codus-top-bar a {
         color: #000000;
       }
+      paper-icon-button {
+        position:absolute;
+        left:200px;
+        z-index:100;
+      }
 
     </style>
 
 <app-header-layout>
   <app-header fixed slot="header">
-    <app-toolbar>
-      <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+      <paper-icon-button icon="codus:menu" on-tap="drawerToggle"></paper-icon-button>
       <app-box id="navbar" threshold="500" scroll-target="document">
         <codus-top-bar>
           <template is="dom-repeat" items="[[containers]]">
@@ -127,23 +131,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </template>
     </codus-top-bar>
     </app-box>
-    </app-toolbar>
   </app-header>
-<app-drawer-layout>
-  <app-drawer slot="drawer">
-
+<app-drawer-layout force-narrow>
+  <app-drawer slot="drawer" >
+Hier ook wat??
   </app-drawer>
- 
-
-
-
-
-
-
-
-
-
-
 
     <app-box effects="parallax-background">
         <img slot="background" src="[[getImageUrl('intro')]]">
@@ -241,12 +233,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.containers = nwcontainers;
             }
             getMarkdownUrl(page) {
-                var url=`https://raw.githubusercontent.com/codusnl/website/master/content/${page}.md?b=`+(new Date).getTime();
+                let url=`https://raw.githubusercontent.com/codusnl/website/master/content/${page}.md?b=`+(new Date).getTime();
                 // console.log(url)
                 return url;
             }
             getImageUrl(page) {
-                var url=`https://raw.githubusercontent.com/codusnl/website/master/content/images/${page}.jpg?b=`+(new Date).getTime();
+                let url=`https://raw.githubusercontent.com/codusnl/website/master/content/images/${page}.jpg?b=`+(new Date).getTime();
                 // console.log(url)
                 return url;
             }
@@ -260,7 +252,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 return window.pageYOffset +
                     this.shadowRoot.querySelector(query).getBoundingClientRect().top;
             }
-
+            drawerToggle() {
+              this.shadowRoot.querySelector('app-drawer').toggle();
+            }
             doScrolling(evt) {
                 let element = this._setId(evt.model.item.id);
                 let duration = this.duration;
@@ -285,9 +279,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 window.requestAnimationFrame(function step(timestamp) {
                     if (!start) start = timestamp;
                     // Elapsed miliseconds since start of scrolling.
-                    var time = timestamp - start;
+                    let time = timestamp - start;
                     // Get percent of completion in range [0, 1].
-                    var percent = Math.min(time / duration, 1);
+                    let percent = Math.min(time / duration, 1);
                     // Apply the easing.
                     // It can cause bad-looking slow frames in browser
                     // performance tool, so be careful.

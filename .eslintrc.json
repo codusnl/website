@@ -1,21 +1,41 @@
 {
-  "extends": ["eslint:recommended", "google"],
+  "extends": "eslint:recommended",
   "parserOptions": {
     "ecmaVersion": 6
   },
+  "rules": {
+    "no-console": "off",
+    "no-var": "error",
+    "semi": "error",
+    "strict": "error",
+    "valid-jsdoc": ["error", {
+      "requireReturn": false,
+      "prefer": {
+        "arg": "param",
+        "argument": "param",
+        "returns": "return"
+      },
+      "preferType": {
+        "Boolean": "boolean",
+        "Number": "number",
+        "String": "string",
+        "object": "Object"
+      }
+    }]
+  },
   "env": {
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "plugins": [
     "html"
   ],
-  "rules": {
-    "brace-style": "off",
-    "new-cap": ["error", { "capIsNewExceptions": ["Polymer"] }],
-    "no-var": "off",
-    "require-jsdoc": "off"
-  },
   "globals": {
-    "Polymer": true
+    "customElements": true,
+    "HTMLImports": true,
+    "Polymer": true,
+    "ShadyDOM": true,
+    "ShadyCSS": true,
+    "JSCompiler_renameProperty": true
   }
 }
