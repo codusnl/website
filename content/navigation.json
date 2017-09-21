@@ -1,0 +1,9 @@
+[
+  {"id": "intro", "hideFromNav": false, "title": "Home", "effects": "parallax-background"},
+  {"id": "wie", "hideFromNav": false, "title": "Wie zijn we"},
+  {"id": "team", "hideFromNav": true, "title": "not shown", "noContent": true, "effects": "parallax-background"},
+  {"id": "wat", "hideFromNav": false, "title": "Wat doen we"},
+  {"id": "visual1", "hideFromNav": true, "noContent": true, "title": "visual", "effects": "parallax-background"},
+  {"id": "voorwie", "hideFromNav": false, "title": "Voor wie"},
+  {"id": "footer", "hideFromNav": false, "title": "Contact"}
+]

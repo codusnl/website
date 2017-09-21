@@ -1,13 +1,3 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
@@ -16,9 +6,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-box/app-box.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
@@ -31,278 +23,327 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
 
 <dom-module id="codus-website-app">
-    <template>
+  <template>
     <style>
-      :host {
+       :host {
         --app-primary-color: #4285f4;
         --app-secondary-color: black;
         --layout-container: {
           z-index: 1;
           /*min-height: 100vh;*/
-        };
+        }
+        ;
         --container-padding: 5vw;
         display: block;
       }
 
-    /* ----------------------- Parallax styles ---------------------- */
-    
-    parallax-element {
-      height: 100vh;
-    }
-
-    div.baseGroup {
-      z-index: 1;
-      min-height: 700px;
-      background: white;
-      @apply --layout-vertical;
-      @apply --layout-center-center;
-    }
-
-    div.baseGroup.footer {
-      min-height: 400px;
-      @apply --layout-horizontal;
-      @apply --layout-center;
-      @apply --layout-around-justified;
-      @apply --layout-flex;
-    }
-    app-box {
-      height:100vh;
-      --app-header-background-front-layer: {
-        background-position: 50% -50%;
-      };
-    }
-    app-box#navbar {
-      height:84px;
-    }
-    app-box img {
-      min-width: 100vw;
-      min-height:140vh;
-    }
-    .block {
-        height: auto;
-    }
-
-    marked-element#intro {
-      @apply --layout-horizontal;
-      @apply --layout-center;
-      color: #ffffff;
-      font-size: 3vh;
-      text-align: center;
-      min-width: 40vh;
-      height: 90vh;
-      margin: 0 auto;
-      /*font-family: "font132904";*/
-      font-family: "helvetica"
-    }
-    #navbar codus-top-bar {
-      position:fixed; 
-        background-color: #000000;
-        color:#ffffff;
-        z-index:+1;
-        transition:  1s ease;
+      parallax-element {
+        height: 100vh;
       }
+
+      /* div.baseGroup {
+        z-index: 1;
+        min-height: 700px;
+        background: white;
+        @apply --layout-vertical;
+        @apply --layout-center-center;
+      } */
+
+      #footer {
+        /* min-height: 400px;
+        @apply --layout-horizontal;
+        @apply --layout-center;
+        @apply --layout-around-justified;
+        @apply --layout-flex; */
+        background-color:var(--app-primary-color);
+      }
+
+      app-box {
+        --app-header-background-front-layer: {
+          background-position: 50% -50%;
+        }
+        ;
+      }
+      app-box[parallax] {
+        height:100vh;
+      }
+      app-box#navbar {
+        height: 84px;
+      }
+
+      app-box img {
+        min-width: 100vw;
+        min-height: 140vh;
+      }
+
+      #intro marked-element {
+        @apply --layout-horizontal;
+        @apply --layout-center;
+        color: #ffffff;
+        font-size: 3vh;
+        text-align: center;
+        min-width: 40vh;
+        height: 90vh;
+        margin: 0 auto;
+        /*font-family: "font132904";*/
+        font-family: "helvetica"
+      }
+
+      #navbar codus-top-bar {
+        position: fixed;
+        background-color: #000000;
+        color: #ffffff;
+        z-index: +1;
+        transition: 1s ease;
+      }
+
+      #mobile-navigation {
+        display: none;
+      }
+
       #navbar codus-top-bar a {
-        color:#ffffff;
+        color: #ffffff;
         text-decoration: none;
       }
-      
+
+      #navbar codus-top-bar paper-tabs {
+        margin-top: 35px;
+        --paper-tabs-selection-bar-color: var(--app-primary-color);
+        --paper-tab-ink: var(--app-primary-color);
+        --paper-tabs-selection-bar: {
+          border-width: 5px;
+        }
+      }
+
+      #navbar codus-top-bar paper-tab {
+        padding: 0 10px;
+        font-size: large;
+      }
+
       #navbar[threshold-triggered] codus-top-bar {
         background-color: #ffffff;
         color: #000000;
       }
+
       #navbar[threshold-triggered] codus-top-bar a {
         color: #000000;
       }
-      paper-icon-button {
-        position:absolute;
-        left:200px;
-        z-index:100;
+
+      #drawer-toggle {
+        position: absolute;
+        right: 20px;
+        top: 0;
+        z-index: 100;
+        display: none;
+        color: #ffffff;
       }
 
+      #navbar[threshold-triggered] #drawer-toggle {
+        color: #000000;
+      }
+
+      @media (max-width: 750px) {
+        #desktop-navigation {
+          display: none;
+        }
+        #drawer-toggle {
+          display: block;
+          --iron-icon-height: 32px;
+          --iron-icon-width: 32px;
+        }
+        #mobile-navigation {
+          display: block;
+          padding-top: 100px;
+        }
+        paper-item a {
+          text-decoration: none;
+          font-size: large;
+          color: #000000;
+        }
+        #mobile-navigation a {
+          display: block;
+        }
+        #desktop-navigation {
+          display: none;
+        }
+      }
     </style>
 
-<app-header-layout>
-  <app-header fixed slot="header">
-      <paper-icon-button icon="codus:menu" on-tap="drawerToggle"></paper-icon-button>
-      <app-box id="navbar" threshold="500" scroll-target="document">
-        <codus-top-bar>
-          <template is="dom-repeat" items="[[containers]]">
-            <a href="#" on-tap="doScrolling">[[item.title]]</a>
-          </template>
-    </codus-top-bar>
-    </app-box>
-  </app-header>
-<app-drawer-layout force-narrow>
-  <app-drawer slot="drawer" >
-Hier ook wat??
-  </app-drawer>
+    <app-header-layout>
+      <app-header fixed slot="header">
+        <app-box id="navbar" threshold="500" scroll-target="document">
+          <codus-top-bar>
+            <paper-tabs id="desktop-navigation" scrollable>
+              <template is="dom-repeat" items="[[navigation]]">
+                <paper-tab link><a href="#" on-tap="doScrolling">[[item.title]]</a></paper-tab>
+              </template>
+            </paper-tabs>
+            <paper-icon-button icon="codus:menu" id="drawer-toggle" on-tap="drawerToggle"></paper-icon-button>
+          </codus-top-bar>
+        </app-box>
+      </app-header>
+      <app-drawer-layout force-narrow>
+        <app-drawer slot="drawer">
+          <div id="mobile-navigation">
+            <template is="dom-repeat" items="[[navigation]]">
+              <paper-item><a href="#" on-tap="doScrolling">[[item.title]]</a></paper-item>
+            </template>
+          </div>
+        </app-drawer>
 
-    <app-box effects="parallax-background">
-        <img slot="background" src="[[getImageUrl('intro')]]">
-        <codus-container id="home" title="Home">
-            <marked-element id="intro">
+        <template is="dom-repeat" items="[[containers]]">
+
+          <app-box effects="[[item.effects]]" parallax$="[[item._hasParallax]]">
+            <template is="dom-if" if="[[item._hasParallax]]">
+              <img slot="background" src="[[getImageUrl(item.id)]]">
+            </template>
+            <codus-container id="[[item.id]]">
+              <template is="dom-if" if="[[!item.noContent]]">
+              <marked-element>
                 <div slot="markdown-html"></div>
-                <script type="text/markdown" src="[[getMarkdownUrl('intro')]]"></script>
-            </marked-element>
-        </codus-container>
-    </app-box>
+                <script type="text/markdown" src="[[getMarkdownUrl(item.id)]]"></script>             
+              </marked-element>
+              </template>
+            </codus-container>
+          </app-box>
+        </template>
 
-    <codus-container id="number2" title="Page 1">
-        <marked-element id="block1">
-            <div slot="markdown-html"></div>
-            <script type="text/markdown" src="[[getMarkdownUrl('block1')]]"></script>
-        </marked-element>
-    </codus-container>
+    </app-header-layout>
+    </app-drawer-layout>
 
-    <app-box effects="parallax-background">
-        <img slot="background" src="[[getImageUrl('block1')]]">
-    </app-box>
+  </template>
 
-    <codus-container id="num2" title="About us">
-        <marked-element id="block2">
-            <div slot="markdown-html"></div>
-            <script type="text/markdown" src="[[getMarkdownUrl('block2')]]"></script>
-        </marked-element>
-    </codus-container>
+  <script>
+    class CodusWebsiteApp extends Polymer.GestureEventListeners(Polymer.Element) {
 
-    <app-box effects="parallax-background">
-        <img slot="background" src="[[getImageUrl('block2')]]">
-    </app-box>
+      static get is() {
+        return 'codus-website-app';
+      }
 
-    <codus-container id="yep" title="Blogs">
-        <marked-element id="block3">
-            <div slot="markdown-html"></div>
-            <script type="text/markdown" src="[[getMarkdownUrl('block3')]]"></script>
-        </marked-element>
-    </codus-container>
+      static get properties() {
+        return {
+          duration: {
+            type: Number,
+            value: 500,
+          },
+          containers: {
+            type: Array,
+            // observer: '_containersChanged',
+          },
+          navigation: {
+            type: Array,
+            value: [],
+          },
+          _rootPath: {
+            type: String,
+            value:'',
+//            value: 'https://raw.githubusercontent.com/codusnl/website/master',
+          }
 
-    <app-box effects="parallax-background">
-        <img slot="background" src="[[getImageUrl('block3')]]">
-    </app-box>
+        };
+      }
 
-    <codus-container class="footer">
-        <p>Copyright © Codus 2017
-        </p>
-        <p></p>
-    </codus-container>
+      static get observers() {
+        return [];
+      }
 
+      constructor() {
+        super();
+      }
 
-  </app-header-layout>
-</app-drawer-layout>
-    
-    </template>
+      ready() {
+        super.ready();
 
-    <script>
-        class CodusWebsiteApp extends Polymer.GestureEventListeners(Polymer.Element) {
-
-            static get is() {
-                return 'codus-website-app';
+        let containersObtained = function (response) {
+          this.containers = response;
+          this.navigation = [];
+          this.containers.forEach((container) => {
+            container._hasParallax = container.effects && container.effects.indexOf('parallax') !== -1;
+            if (container.title && !container.hideFromNav) {
+              this.navigation.push({
+                'id': container.id,
+                'title': container.title,
+              });
             }
+           });
+        };
+        // get the containers
+        fetch(`${this._rootPath}/content/navigation.json`, {
+          headers: { 'Content-Type': 'application/json' }
+        })
+          .then(response => response.json())
+          .then(containersObtained.bind(this));
+      }
+      getMarkdownUrl(page) {
+        let url = `${this._rootPath}/content/${page}.md?b=` + (new Date).getTime();
+        return url;
+      }
+      getImageUrl(page) {
+        let url = `${this._rootPath}/content/images/${page}.jpg?b=` + (new Date).getTime();
+        return url;
+      }
+      // _containersChanged(c) {
+      //   // console.log('cont', c);
+      // }
+      _setId(id) {
+        return '#' + id;
+      }
+      getElementY(query) {
+        return window.pageYOffset +
+          this.shadowRoot.querySelector(query).getBoundingClientRect().top - 
+          this.shadowRoot.querySelector('app-header').getBoundingClientRect().bottom;
+      }
+      drawerToggle() {
+        if (this.shadowRoot.querySelector('app-drawer-layout').narrow) {
+          this.shadowRoot.querySelector('app-drawer').toggle();
+        }
+      }
+      doScrolling(evt) {
+        let element = this._setId(evt.model.item.id);
+        let duration = this.duration;
+        let startingY = window.pageYOffset;
+        let elementY = this.getElementY(element);
+        // If element is close to page's bottom then window will scroll only
+        // to some position above the element.
+        let targetY = document.body.scrollHeight - elementY < window.innerHeight ?
+          document.body.scrollHeight - window.innerHeight : elementY;
+        let diff = targetY - startingY;
+        // Easing function: easeInOutCubic
+        // From: https://gist.github.com/gre/1650294
+        let easing = (t) => {
+          return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+        };
+        let start;
 
-            static get properties() {
-                return {
-                    duration: {
-                        type: Number,
-                        value: 500,
-                    },
-                    containers: {
-                        type: Array,
-                        observer: '_containersChanged',
-                    },
-                };
-            }
-
-            static get observers() {
-                return [];
-            }
-
-            constructor() {
-                super();
-            }
-            ready() {
-                super.ready();
-                let containers = this.shadowRoot.querySelectorAll('codus-container');
-                let nwcontainers = [];
-                containers.forEach((element) => {
-                    // Polymer.Gestures.addListener(element, 'tap', (e) => this.doScrolling(e));
-                    nwcontainers.push({
-                        'id': element.id,
-                        'title': element.title,
-                    });
-                });
-                this.containers = nwcontainers;
-            }
-            getMarkdownUrl(page) {
-                let url=`https://raw.githubusercontent.com/codusnl/website/master/content/${page}.md?b=`+(new Date).getTime();
-                // console.log(url)
-                return url;
-            }
-            getImageUrl(page) {
-                let url=`https://raw.githubusercontent.com/codusnl/website/master/content/images/${page}.jpg?b=`+(new Date).getTime();
-                // console.log(url)
-                return url;
-            }
-            _containersChanged(c) {
-                console.log(c);
-            }
-            _setId(id) {
-                return '#' + id;
-            }
-            getElementY(query) {
-                return window.pageYOffset +
-                    this.shadowRoot.querySelector(query).getBoundingClientRect().top;
-            }
-            drawerToggle() {
-              this.shadowRoot.querySelector('app-drawer').toggle();
-            }
-            doScrolling(evt) {
-                let element = this._setId(evt.model.item.id);
-                let duration = this.duration;
-                let startingY = window.pageYOffset;
-                let elementY = this.getElementY(element);
-                // If element is close to page's bottom then window will scroll only
-                // to some position above the element.
-                let targetY = document.body.scrollHeight - elementY < window.innerHeight ?
-                    document.body.scrollHeight - window.innerHeight : elementY;
-                let diff = targetY - startingY;
-                // Easing function: easeInOutCubic
-                // From: https://gist.github.com/gre/1650294
-                let easing = (t) => {
-                    return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-                };
-                let start;
-
-                if (!diff) return;
-
-                // Bootstrap our animation - it will get called right before
-                // next frame shall be rendered.
-                window.requestAnimationFrame(function step(timestamp) {
-                    if (!start) start = timestamp;
-                    // Elapsed miliseconds since start of scrolling.
-                    let time = timestamp - start;
-                    // Get percent of completion in range [0, 1].
-                    let percent = Math.min(time / duration, 1);
-                    // Apply the easing.
-                    // It can cause bad-looking slow frames in browser
-                    // performance tool, so be careful.
-                    percent = easing(percent);
-
-                    window.scrollTo(0, startingY + diff * percent);
-
-                    // Proceed with animation as long as we wanted it to.
-                    if (time < duration) {
-                        window.requestAnimationFrame(step);
-                    }
-                });
-            }
-
+        if (!diff) return;
+        if (this.shadowRoot.querySelector('app-drawer-layout').narrow) {
+          this.shadowRoot.querySelector('app-drawer').close();
         }
 
-        window.customElements.define(CodusWebsiteApp.is, CodusWebsiteApp);
-        // Apply event handlers. Example of firing the scrolling mechanism.
-        //  document.getElementById('scrollMid').addEventListener('click', doScrolling.bind(null, '#middle', 1000));
+        // Bootstrap our animation - it will get called right before
+        // next frame shall be rendered.
+        window.requestAnimationFrame(function step(timestamp) {
+          if (!start) start = timestamp;
+          // Elapsed miliseconds since start of scrolling.
+          let time = timestamp - start;
+          // Get percent of completion in range [0, 1].
+          let percent = Math.min(time / duration, 1);
+          // Apply the easing.
+          // It can cause bad-looking slow frames in browser
+          // performance tool, so be careful.
+          percent = easing(percent);
 
-        // Or simply:
-        // doScrolling('#mytarget', 1000)
-    </script>
+          window.scrollTo(0, startingY + diff * percent);
+
+          // Proceed with animation as long as we wanted it to.
+          if (time < duration) {
+            window.requestAnimationFrame(step);
+          }
+        });
+      }
+
+    }
+
+    window.customElements.define(CodusWebsiteApp.is, CodusWebsiteApp);
+  </script>
 </dom-module>
