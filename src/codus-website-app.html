@@ -29,39 +29,19 @@
         --app-secondary-color: black;
         --layout-container: {
           z-index: 1;
-          /*min-height: 100vh;*/
-        }
-        ;
+        };
         --container-padding: 5vw;
         display: block;
       }
 
-      parallax-element {
-        height: 100vh;
-      }
-
-      /* div.baseGroup {
-        z-index: 1;
-        min-height: 700px;
-        background: white;
-        @apply --layout-vertical;
-        @apply --layout-center-center;
-      } */
-
       #footer {
-        /* min-height: 400px;
-        @apply --layout-horizontal;
-        @apply --layout-center;
-        @apply --layout-around-justified;
-        @apply --layout-flex; */
         background-color:var(--app-primary-color);
       }
 
       app-box {
         --app-header-background-front-layer: {
           background-position: 50% -50%;
-        }
-        ;
+        };
       }
       app-box[parallax] {
         height:100vh;
@@ -70,11 +50,19 @@
         height: 84px;
       }
 
-      app-box img {
+      app-box .parallax {
         min-width: 100vw;
         min-height: 140vh;
       }
 
+      .parallax img {
+        width:100%;
+        height:auto;
+      }
+      app-box.intro .parallax img {
+        height: 100%;
+        width: auto;
+      }
       #intro marked-element {
         @apply --layout-horizontal;
         @apply --layout-center;
@@ -82,12 +70,12 @@
         font-size: 3vh;
         text-align: center;
         min-width: 40vh;
-        height: 90vh;
+        max-width:60vw;
+        height: 50vh;
         margin: 0 auto;
-        /*font-family: "font132904";*/
-        font-family: "helvetica"
+        font-family: "helvetica";
+        text-shadow: 1px 1px 2px black;
       }
-
       #navbar codus-top-bar {
         position: fixed;
         background-color: #000000;
@@ -192,9 +180,9 @@
 
         <template is="dom-repeat" items="[[containers]]">
 
-          <app-box effects="[[item.effects]]" parallax$="[[item._hasParallax]]">
+          <app-box effects="[[item.effects]]" class$="[[item.id]]" parallax$="[[item._hasParallax]]">
             <template is="dom-if" if="[[item._hasParallax]]">
-              <img slot="background" src="[[getImageUrl(item.id)]]">
+              <div class="parallax" slot="background"><img src="[[getImageUrl(item.id)]]"></div>
             </template>
             <codus-container id="[[item.id]]">
               <template is="dom-if" if="[[!item.noContent]]">
@@ -235,8 +223,8 @@
           },
           _rootPath: {
             type: String,
-            value:'',
-//            value: 'https://raw.githubusercontent.com/codusnl/website/master',
+//            value:'',
+            value: 'https://raw.githubusercontent.com/codusnl/website/master',
           }
 
         };

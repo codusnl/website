@@ -1,5 +1,3 @@
-# Codus
+# Wie we zijn
 
-**Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Proin vel odio at magna sollicitudin scelerisque vel eu odio. Fusce finibus ipsum commodo eros aliquam luctus. Curabitur aliquet sagittis augue, sit amet fermentum nunc faucibus et. Suspendisse ultricies malesuada scelerisque. In in nisi vehicula, elementum metus at, rhoncus sem. Etiam semper ex mauris, in ultricies magna euismod vitae. Mauris ac eros non lacus ultricies pharetra.
-
-__Morbi ac elit__ quis erat vehicula commodo. Sed maximus auctor felis non egestas. Proin dapibus rutrum ante, eget ornare tellus. Aliquam ipsum orci, pellentesque in elit a, aliquet laoreet nunc. Maecenas et egestas urna. Curabitur ornare suscipit mauris feugiat auctor. Aliquam erat volutpat. Suspendisse scelerisque risus dolor, at porta felis condimentum in. Pellentesque tincidunt at quam quis sodales. Pellentesque nec eros augue.
+Wij zijn softwraeontwiikelaars. We hebben onze sporen ruimschoots verdiend, werkend voor de top 250 organisaties in Nederland, we lopen voorop in de ontwikkelingen en kunnen het verschil maken voor een opdrachtgever.
