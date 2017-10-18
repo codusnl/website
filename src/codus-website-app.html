@@ -255,8 +255,11 @@
            });
         };
         // get the containers
+
         fetch(`${this._rootPath}/content/navigation.json`, {
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },
+          mode: 'cors',
+          cache: 'default'
         })
           .then(response => response.json())
           .then(containersObtained.bind(this));
