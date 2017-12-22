@@ -2,7 +2,7 @@
   "name": "codus-website",
   "description": "Codus website",
   "author": "Codus",
-  "license": "None",
+  "license": "UNLICENSED",
   "scripts": {
     "start": "node server.js",
     "start.old": "polymer serve --port 3000",
