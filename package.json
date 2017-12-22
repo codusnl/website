@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "start.old": "polymer serve --port 3000",
-    "lint": "npm run lint:javascript && polymer lint",
+    "lint": "yarn lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "build": "npm install;bower install;polymer build",
+    "build": "yarn install;bower install;polymer build",
     "test:integration": "polymer build # test that psk builds without error with the CLI"
   },
   "pre-commit": [
