@@ -1,7 +1,7 @@
 {
   "name": "codus-website",
   "description": "Codus website",
-  "author": "Codus",  
+  "author": "Codus",
   "license": "None",
   "devDependencies": {
     "eslint": "^3.19.0",
@@ -12,6 +12,10 @@
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
+    "build": "polymer build",
     "test:integration": "polymer build # test that psk builds without error with the CLI"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
   }
 }
