@@ -224,7 +224,7 @@
           _rootPath: {
             type: String,
 //            value:'',
-            value: 'https://raw.githubusercontent.com/codusnl/website/master',
+            value: '',
           }
 
         };
@@ -265,11 +265,11 @@
           .then(containersObtained.bind(this));
       }
       getMarkdownUrl(page) {
-        let url = `${this._rootPath}/content/${page}.md?b=` + (new Date).getTime();
+        let url = `${this._rootPath}/content/${page}.md`;//?b=` + (new Date).getTime();
         return url;
       }
       getImageUrl(page) {
-        let url = `${this._rootPath}/content/images/${page}.jpg?b=` + (new Date).getTime();
+        let url = `${this._rootPath}/content/images/${page}.jpg`;//?b=` + (new Date).getTime();
         return url;
       }
       // _containersChanged(c) {

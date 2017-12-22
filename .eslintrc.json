@@ -6,7 +6,7 @@
   "rules": {
     "no-console": "off",
     "no-var": "error",
-    "semi": "error",
+    "semi": 0,
     "strict": 0,
     "valid-jsdoc": ["error", {
       "requireReturn": false,

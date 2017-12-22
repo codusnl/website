@@ -1,18 +1,25 @@
-// Node.js notation for importing packages
 const express = require('express');
-
-// Spin up a server
+// const url = require('url');
+// const yves = require('yves');
+const request = require('request');
 const app = express();
+const apicache = require('apicache')
+const cache = apicache.middleware
 
-// Serve static files from the main build directory
+app.get('/content/*', cache('5 minutes'), function(req, res){
+  // yves(req.originalUrl)
+  request.get('https://raw.githubusercontent.com/codusnl/website/master'+req.originalUrl).pipe(res);
+  // const parsed = url.parse(req.originalUrl)
+  // res.sendFile(parsed.pathname, {root: '.'});
+});
+
+
 app.use(express.static(__dirname + '/build/bundled'));
 
-// Render index.html on the main page, specify the root
 app.get('/', function(req, res){
   res.sendFile("index.html", {root: '.'});
 });
 
-// Tell the app to listen for requests on port 3000
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(process.env.PORT || 3000, function () {
+  console.log('Codus app listening on port '+(process.env.PORT || 3000));
 });
