@@ -3,21 +3,28 @@
   "description": "Codus website",
   "author": "Codus",
   "license": "None",
-  "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-google": "^0.7.0",
-    "eslint-plugin-html": "^2.0.0"
-  },
   "scripts": {
-    "start": "polymer serve --port 3000",
+    "start": "node server.js",
+    "start.old": "polymer serve --port 3000",
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "build": "polymer build",
     "test:integration": "polymer build # test that psk builds without error with the CLI"
   },
+  "pre-commit": [
+    "precommit-msg",
+    "build"
+  ],
   "dependencies": {
     "express": "^4.16.2",
     "polymer-cli": "^1.5.7"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.0",
+    "eslint-plugin-html": "^2.0.0",
+    "pre-commit": "^1.2.2"
   }
 }
