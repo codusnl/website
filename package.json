@@ -10,12 +10,12 @@
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "build": "polymer build",
+    "build": "npm install;bower install;polymer build",
     "test:integration": "polymer build # test that psk builds without error with the CLI"
   },
   "pre-commit": [
     "precommit-msg",
-    "build"
+    "lint"
   ],
   "dependencies": {
     "express": "^4.16.2",
