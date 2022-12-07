@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "apicache": "^1.2.0",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "polymer-cli": "^1.5.7",
     "request": "^2.83.0",
     "yves": "^1.0.41"
